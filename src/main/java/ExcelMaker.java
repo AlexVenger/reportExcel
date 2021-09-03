@@ -14,17 +14,15 @@ public class ExcelMaker {
     private static Map<String, CellStyle> styles;
     private static SXSSFSheet sheet;
 
-    public static byte[] createExcel(ArrayList<String> headers, ArrayList<ArrayList<Object>> bodies /*ArrayList<ReportRow> reportRows*/) {
+    public static byte[] createExcel(List<String> headers, List<List<Object>> bodies) {
         SXSSFWorkbook workbook = new SXSSFWorkbook();
         createStyles(workbook);
 
-//        ArrayList<String> headers = Report1Row.headers;
-        ArrayList<Object> body;
+        List<Object> body;
 
-        int i;
         sheet = workbook.createSheet();
         SXSSFRow row = sheet.createRow(0);
-        for (i = 0; i < headers.size(); i++) {
+        for (int i = 0; i < headers.size(); i++) {
             SXSSFCell cell = row.createCell(i);
             cell.setCellStyle(styles.get("style2"));
             cell.setCellValue(headers.get(i));
@@ -33,22 +31,12 @@ public class ExcelMaker {
         for(int j = 0; j < bodies.size(); j++) {
             body = bodies.get(j);
             row = sheet.createRow(j + 1);
-            for (i = 0; i < headers.size(); i++) {
+            for (int i = 0; i < headers.size(); i++) {
                 SXSSFCell cell = row.createCell(i);
                 cell.setCellStyle(styles.get("style3"));
                 cell.setCellValue(body.get(i).toString());
             }
         }
-
-//        for(int j = 0; j < reportRows.size(); j++) {
-//            body = reportRows.get(j).getBody();
-//            row = sheet.createRow(j + 1);
-//            for (i = 0; i < headers.size(); i++) {
-//                SXSSFCell cell = row.createCell(i);
-//                cell.setCellStyle(styles.get("style3"));
-//                cell.setCellValue(body.get(i).toString());
-//            }
-//        }
 
         ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
         try {
@@ -83,14 +71,10 @@ public class ExcelMaker {
 
 
         XSSFCellStyle titleCellStyle = (XSSFCellStyle) workbook.createCellStyle();
-//        titleCellStyle.setWrapText(true);
         Font titleFont = workbook.createFont();
-//        titleFont.setFontHeightInPoints((short) 12);
         titleFont.setFontName("Arial");
         titleFont.setColor(IndexedColors.BLACK.getIndex());
         titleFont.setBold(true);
-//        titleCellStyle.setAlignment(HorizontalAlignment.FILL);
-//        titleCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         titleCellStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(220, 230, 241)));
         titleCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleCellStyle.setFont(titleFont);
@@ -103,12 +87,8 @@ public class ExcelMaker {
 
         CellStyle dataStyle = workbook.createCellStyle();
         Font dataFont = workbook.createFont();
-//        dataStyle.setWrapText(true);
-//        dataFont.setFontHeightInPoints((short) 10);
         dataFont.setFontName("Arial");
         dataFont.setColor(IndexedColors.BLACK.getIndex());
-//        dataStyle.setAlignment(HorizontalAlignment.FILL);
-//        dataStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         dataStyle.setFont(dataFont);
         dataStyle.setBorderBottom(BorderStyle.MEDIUM);
         dataStyle.setBorderTop(BorderStyle.MEDIUM);
