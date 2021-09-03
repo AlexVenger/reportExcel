@@ -14,11 +14,11 @@ public class ExcelMaker {
     private static Map<String, CellStyle> styles;
     private static SXSSFSheet sheet;
 
-    public static byte[] createExcel(ArrayList<ReportRow> reportRows) {
+    public static byte[] createExcel(ArrayList<String> headers, ArrayList<ArrayList<Object>> bodies /*ArrayList<ReportRow> reportRows*/) {
         SXSSFWorkbook workbook = new SXSSFWorkbook();
         createStyles(workbook);
 
-        ArrayList<String> headers = Report1Row.headers;
+//        ArrayList<String> headers = Report1Row.headers;
         ArrayList<Object> body;
 
         int i;
@@ -30,8 +30,8 @@ public class ExcelMaker {
             cell.setCellValue(headers.get(i));
         }
 
-        for(int j = 0; j < reportRows.size(); j++) {
-            body = reportRows.get(j).getBody();
+        for(int j = 0; j < bodies.size(); j++) {
+            body = bodies.get(j);
             row = sheet.createRow(j + 1);
             for (i = 0; i < headers.size(); i++) {
                 SXSSFCell cell = row.createCell(i);
@@ -39,6 +39,16 @@ public class ExcelMaker {
                 cell.setCellValue(body.get(i).toString());
             }
         }
+
+//        for(int j = 0; j < reportRows.size(); j++) {
+//            body = reportRows.get(j).getBody();
+//            row = sheet.createRow(j + 1);
+//            for (i = 0; i < headers.size(); i++) {
+//                SXSSFCell cell = row.createCell(i);
+//                cell.setCellStyle(styles.get("style3"));
+//                cell.setCellValue(body.get(i).toString());
+//            }
+//        }
 
         ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
         try {
