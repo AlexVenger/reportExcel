@@ -3,8 +3,7 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,6 +25,7 @@ public class ExcelMaker {
             SXSSFCell cell = row.createCell(i);
             cell.setCellStyle(styles.get("style2"));
             cell.setCellValue(headers.get(i));
+            sheet.setColumnWidth(i, 5600);
         }
 
         for(int j = 0; j < bodies.size(); j++) {

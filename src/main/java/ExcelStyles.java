@@ -28,12 +28,15 @@ public class ExcelStyles {
 
         XSSFCellStyle titleCellStyle = (XSSFCellStyle) workbook.createCellStyle();
         Font titleFont = workbook.createFont();
+        titleCellStyle.setWrapText(true);
         titleFont.setFontName("Arial");
-        titleFont.setColor(IndexedColors.BLACK.getIndex());
+        titleFont.setColor(IndexedColors.WHITE.getIndex());
         titleFont.setBold(true);
-        titleCellStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(220, 230, 241)));
+        titleCellStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(1, 42, 73)));
         titleCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleCellStyle.setFont(titleFont);
+        titleCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        titleCellStyle.setAlignment(HorizontalAlignment.CENTER);
         titleCellStyle.setBorderBottom(BorderStyle.MEDIUM);
         titleCellStyle.setBorderTop(BorderStyle.MEDIUM);
         titleCellStyle.setBorderRight(BorderStyle.MEDIUM);
@@ -46,6 +49,7 @@ public class ExcelStyles {
         dataFont.setFontName("Arial");
         dataFont.setColor(IndexedColors.BLACK.getIndex());
         dataStyle.setFont(dataFont);
+        dataStyle.setAlignment(HorizontalAlignment.CENTER);
         dataStyle.setBorderBottom(BorderStyle.MEDIUM);
         dataStyle.setBorderTop(BorderStyle.MEDIUM);
         dataStyle.setBorderRight(BorderStyle.MEDIUM);
